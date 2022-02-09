@@ -1,200 +1,63 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-<title>NASA Y+ Calculator Rebuilt by Liao</title>
+<title>Fei Liao</title>
 
-<meta name="description" content="Y+ Calculator">
-<meta name="keywords" content="y+,yplus,y plus,Y+,Yplus,YPlus,Y plus,wall spacing,first cell height">
-
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 600px;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: center;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-div {
-  height: 400px;
-  width: 700px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -200px;
-  margin-left: -350px;
-}
-
-button{
-	height:50px;
-	width:600px;
-  font-size: 120%;
-}
-
-blockquote {
-  margin: 1em;
-  background: #ffffff;
-  border: 1px solid #333333;
-  padding: 0.5em 0.5em;
-  border-radius: 0.5em;
-  box-shadow: gray 0.3em 0.3em 0.5em 
-}
-
-</style>
-
-
-<script type="text/javascript">
-
-function fromRe(Re,L,yplus) {
-  let Pt = 101325.0
-  let Tt = 288.15
-  let gamma = 1.4
-  let mu = 1.7894e-5
-  let Kelvin = 273.15
-  let R = 287.074
-  let Sutherland = 110.6 / Kelvin
-  let Ratio = 1. + 0.5 * (gamma - 1.0)
-  let P = Pt / Math.pow( Ratio, (gamma / (gamma - 1.0) ) )
-  let T = Tt / Ratio
-  let rho = P / R / T
-  let temp = T / Kelvin
-  let muT = mu * (Sutherland + 1.0) * temp * Math.sqrt(temp) / (Sutherland + temp) / rho
-  let V = Re / L * muT
-  let yval = y(Re,rho,V,yplus,muT)
-  return yval
-}
-
-function y(Re,rho,V,yplus,muT) {
-  let i = 0
-  let ale = log10(Math.exp(1.0))
-  let Cf = 0.02
-  
-  while ( i < 10 ) {
-    let fun = 4.15 * Math.sqrt(Cf) * log10(Re * Cf) + 1.7 * Math.sqrt(Cf) - 1.0
-    let dfun = ( 4.15 * ale + 0.5 * 4.15 * log10(Re * Cf) + 1.7 / 2.0) / Math.sqrt(Cf)
-    let df = fun / dfun
-
-    if( Math.abs(df / Cf) <= Math.exp(-5.0) ) break
-
-    let Cfo = Cf - df
-    if( Cfo <= 0.0 )
-      Cf = 0.5 * Cf
-    else
-      Cf = Cfo
-
-    i++
-  }
-
-  //Cfo = Math.pow( (1.0 / ( 4.15 * log10(Re * Cf) + 1.7) ), 2.0 )
-  let tau = 0.5 * rho * V * V * Cf
-  let aus = Math.sqrt( tau / rho )
-  return yplus * muT / aus
-}
-
-function log10(x) {
-  return Math.log(x) / Math.log(10.0)
-}
-
-function calc_y()
-{
-
-  var res = document.getElementById("re").value
-  if (res == "") {
-    alert("Re!");
-    return false;
-  }
-  else
-  {
-    var Re = parseFloat(res)
-  }
-
-  var Ls = document.getElementById("L").value
-  if (Ls == "") {
-    alert("L!");
-    return false;
-  }
-  else
-  {
-    var L = parseFloat(Ls)
-  }
-
-  var ypluss = document.getElementById("yplus").value
-  if (ypluss == "") {
-    alert("yplus!");
-    return false;
-  }
-  else
-  {
-    var yplus = parseFloat(ypluss)
-  }
-
-  var dY = fromRe(Re,L,yplus)
-
-  //document.getElementById("result").innerHTML = "Calculated &#916;y = "+String(dY)+" m";
-  document.getElementById("dy").value = dY;
-}
-
-</script>
+<meta name="description" content="Fei Liao's Homepage">
+<meta name="keywords" content="Fei Liao, NWPU, CFD">
+<link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="style.css">
+<script src="w3.js"></script>
 </head>
   
 <body>
 
-  <div align="center">
 
-    <blockquote>
+<div class="w3-bar navbar">
+  <a class="w3-bar-item w3-button w3-hover-light-grey w3-light-grey" href="index.html">Home</a>
+  <a class="w3-bar-item w3-button w3-hover-light-grey" href="research.html">Research</a>
+  <a class="w3-bar-item w3-button w3-hover-light-grey" href="publication.html">Publication</a>
+  <a class="w3-bar-item w3-button w3-hover-light-grey" href="gallery.html">Gallery</a>
+  <a class="w3-bar-item w3-button w3-hover-light-grey" href="yplus.html">Y+ Calculator</a>
+</div>
 
-      <h1>NASA Y+ Calculator Rebuilt by F. Liao</h1> 
+<div class="w3-row" style="margin-top:1em">
 
-      <p>This comes from http://geolab.larc.nasa.gov/APPS/YPlus/ by William T. Jones.</p> 
-
-      <table>
-        <tr>
-          <th>Variable</th>
-          <th>Unit</th>
-          <th>Value</th>
-        </tr>
-        <tr>
-          <td>Reynolds Number</td>
-          <td>-</td>
-          <td><input type="text" name="re" id="re"></td>
-        </tr>
-        <tr>
-          <td>Reference Length that Re is based on</td>
-          <td>m</td>
-          <td><input type="text" name="L" id="L"></td>
-        </tr>
-        <tr>
-          <td>Desired y+</td>
-          <td>-</td>
-          <td><input type="text" name="yplus" id="yplus"></td>
-        </tr>
-        <tr>
-          <td><font color="blue">Calculated &#916;y</font></td>
-          <td><font color="blue">m</font></td>
-          <td><input type="text" name="dy" id="dy" readonly="readonly"></td>
-        </tr>
-      </table>
-
-      <br>
-
-      <button type="button" onclick="return calc_y()" id="result">Calculate!</button> 
-
-      <br>
-      <p>
-      <font size="-1">89f.liao@gmail.com</font>
-      </p>
-
-
-    </blockquote>
-
+  <div class="w3-container w3-col" style="width:70%">
+    <h1>Fei Liao</h1>
+    <p>
+      <b>Associate Professor</b><br>
+      School of Aeronautics<br>
+      Northwestern Polytechnical University (NPU)<br>
+    </p>
+    <p>
+      <b>Mail:</b> A613 Hangkong Building, Northwestern Polytechnical University<br>
+      127 West Youyi Road, Beilin District, Xi'an Shaanxi, 710072, P. R. China
+    </p>
+    <p>
+      <b>Email:</b> <img src="mail.png" alt="" style="vertical-align:bottom" />
+    </p>
   </div>
+
+  <div class="w3-container w3-col" style="width:30%">
+    <img src="F.Liao.jpg" style="width:100%" alt="">
+  </div>
+
+</div>
+
+
+<div class="footer">
+  <p style="margin-top:5px">
+    Copyright
+    &copy;
+    <script>
+      document.write(new Date().getUTCFullYear());
+    </script>.
+    All rights reserved.
+  </p>
+</div>
+
 
 </body>
 </html>

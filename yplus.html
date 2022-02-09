@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>NASA Y+ Calculator Rebuilt by F. Liao</title>
+
+<meta name="description" content="Y+ Calculator">
+<meta name="keywords" content="y+,yplus,y plus,Y+,Yplus,YPlus,Y plus,wall spacing,first cell height">
+
+<link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="style.css">
+<script src="w3.js"></script>
+<script src="yplus.js"></script>
+
+<style>
+table {
+  border-collapse: collapse;
+  width: 650px;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+.yplus {
+  height: 400px;
+  width: 750px;
+  position: fixed;
+  left: 50%;
+  margin-left: -375px;
+}
+button{
+	height:50px;
+	width:650px;
+  font-size: 120%;
+}
+blockquote {
+  margin: 1em;
+  background: #ffffff;
+  border: 1px solid #333333;
+  padding: 0.5em 0.5em;
+  border-radius: 0.5em;
+  box-shadow: gray 0.3em 0.3em 0.5em 
+}
+</style>
+
+</head>
+  
+<body>
+
+  <div class="w3-bar navbar">
+     <a class="w3-bar-item w3-button w3-hover-light-grey" href="index.html">Home</a>
+     <a class="w3-bar-item w3-button w3-hover-light-grey" href="research.html">Research</a>
+     <a class="w3-bar-item w3-button w3-hover-light-grey" href="publication.html">Publication</a>
+     <a class="w3-bar-item w3-button w3-hover-light-grey" href="gallery.html">Gallery</a>
+     <a class="w3-bar-item w3-button w3-hover-light-grey w3-light-grey" href="yplus.html">Y+ Calculator</a>
+  </div>
+
+  <div class="yplus" align="center">
+    <blockquote>
+      <h1>NASA Y+ Calculator Rebuilt by F. Liao</h1> 
+      <p>This originates from http://geolab.larc.nasa.gov/APPS/YPlus/ written by William T. Jones.</p> 
+      <table>
+        <tr>
+          <th>Variable</th>
+          <th>Unit</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>Reynolds Number</td>
+          <td>-</td>
+          <td><input type="text" name="re" id="re"></td>
+        </tr>
+        <tr>
+          <td>Reference Length that Re is based on</td>
+          <td>m</td>
+          <td><input type="text" name="L" id="L"></td>
+        </tr>
+        <tr>
+          <td>Desired y+</td>
+          <td>-</td>
+          <td><input type="text" name="yplus" id="yplus"></td>
+        </tr>
+        <tr>
+          <td><font color="blue">Calculated &#916;y</font></td>
+          <td><font color="blue">m</font></td>
+          <td><input type="text" name="dy" id="dy" readonly="readonly"></td>
+        </tr>
+      </table> <br>
+      <button type="button" onclick="return calc_y()" id="result">Calculate!</button> <br>
+      <p> <img src="mail.png" alt="" style="vertical-align:middle" /></p>
+    </blockquote>
+  </div>
+
+</body>
+</html>

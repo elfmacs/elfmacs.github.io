@@ -1,0 +1,62 @@
+.navbar {
+  max-width: 100%;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #354c62 !important;
+  font-family: Arial, sans-serif;
+  border-bottom: 2px solid #354c62 !important;
+  margin-bottom: 20px;
+}
+
+.footer {
+  border-top: 1px solid #354c62 !important;
+  margin-top: 10px;
+  text-align: right;
+}
+
+p.gallery-text {
+  font-size: 1.0em;
+  cursor: pointer;
+  padding: 4px 4px;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  background-color: #F9F9F9;
+}
+
+p.gallery-text:hover {
+  background-color: #F5F5F5;
+}
+
+p.gallery-text:before {
+  content: "\25CB";
+  margin-right:0.5em;
+}
+
+html, body {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  color: #000;
+}
+
+html {
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: white;
+}
+
+body {
+  max-width: 900px;
+  margin: auto;
+  background-color: white;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: Georgia, serif;
+}
+
+img.gallery {
+  margin: auto;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 3em;
+}
